@@ -1,0 +1,101 @@
+{
+  "plan_context": {
+    "purpose": "To validate the implementation of discount code support during the checkout process, ensuring correct application and error handling.",
+    "in_scope": [
+      "Discount code entry and validation",
+      "Error messaging for invalid or inapplicable codes",
+      "Real-time order total updates",
+      "Mobile layout support for discount code entry"
+    ],
+    "out_of_scope": [
+      "Support for stacking multiple discount codes",
+      "Handling of zero total order scenarios"
+    ]
+  },
+  "requirements": [
+    {
+      "req_id": "REQ-001",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "Customers can enter a discount code during checkout to receive a discount on their order.",
+      "actors": [
+        "Customer"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-002",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "The discount code should be entered after shipping information but before payment.",
+      "actors": [
+        "Customer"
+      ],
+      "testable": true,
+      "ambiguity_flags": [
+        "Uncertainty about final placement in the flow"
+      ]
+    },
+    {
+      "req_id": "REQ-003",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "The discount engine validates the code and returns a discount value.",
+      "actors": [
+        "System"
+      ],
+      "testable": true,
+      "ambiguity_flags": [
+        "Lack of documentation for the discount engine endpoint"
+      ]
+    },
+    {
+      "req_id": "REQ-004",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "Expired discount codes return a clear error message.",
+      "actors": [
+        "System"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-005",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "Codes that are valid but do not apply to the items in the cart return a user-facing message.",
+      "actors": [
+        "System"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-006",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "Only one discount code can be applied per order.",
+      "actors": [
+        "Customer"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-007",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "Order total updates in real time when a discount code is applied, without a page reload.",
+      "actors": [
+        "System"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-008",
+      "prd_ref": "Feature Discussion Notes",
+      "description": "The discount code entry field must work on the mobile layout of the cart page.",
+      "actors": [
+        "Customer"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    }
+  ]
+}

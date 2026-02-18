@@ -1,0 +1,69 @@
+{
+  "plan_context": {
+    "purpose": "To validate the implementation of the new checkout flow, ensuring it is faster, supports guest users, and includes email confirmation and discount application.",
+    "in_scope": [
+      "Checkout flow",
+      "Email confirmation",
+      "Guest checkout",
+      "Discount code application",
+      "Order confirmation page"
+    ],
+    "out_of_scope": [
+      "Rebuilding the login flow",
+      "Touching the payment gateway",
+      "Post order fulfilment",
+      "Admin tools"
+    ]
+  },
+  "requirements": [
+    {
+      "req_id": "REQ-001",
+      "prd_ref": "2.1 Email Confirmation",
+      "description": "After a purchase, an email confirmation with order details should be sent to the customer.",
+      "actors": [
+        "Customer"
+      ],
+      "testable": true,
+      "ambiguity_flags": [
+        "Definition of 'fast' is unclear, possibly under a minute or 30 seconds."
+      ]
+    },
+    {
+      "req_id": "REQ-002",
+      "prd_ref": "2.2 Guest Checkout",
+      "description": "Users should be able to checkout without creating an account.",
+      "actors": [
+        "Guest User"
+      ],
+      "testable": true,
+      "ambiguity_flags": [
+        "UX design for encouraging account creation is not finalized."
+      ]
+    },
+    {
+      "req_id": "REQ-003",
+      "prd_ref": "Discounts",
+      "description": "Customers can apply a discount code at checkout, updating the total before payment.",
+      "actors": [
+        "Customer"
+      ],
+      "testable": true,
+      "ambiguity_flags": [
+        "Handling of multiple discount codes and expired codes is undefined."
+      ]
+    },
+    {
+      "req_id": "REQ-004",
+      "prd_ref": "Order Confirmation Page",
+      "description": "Display order details after purchase, including item name, quantity, price, total, and possibly estimated delivery.",
+      "actors": [
+        "Customer"
+      ],
+      "testable": true,
+      "ambiguity_flags": [
+        "Inclusion of estimated delivery is not confirmed.",
+        "Design comp is not finalized."
+      ]
+    }
+  ]
+}

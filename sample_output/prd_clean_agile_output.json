@@ -1,0 +1,70 @@
+{
+  "plan_context": {
+    "purpose": "Validate the guest checkout flow to ensure users can complete purchases without creating an account, reducing cart abandonment.",
+    "in_scope": [
+      "Guest checkout initiation",
+      "Email capture during checkout",
+      "Order confirmation email delivery",
+      "Session integrity across checkout steps",
+      "Optional account creation prompt post-purchase"
+    ],
+    "out_of_scope": [
+      "Account creation flow",
+      "Social login or SSO",
+      "Saved payment methods for guest users",
+      "Post-purchase account upgrade prompt"
+    ]
+  },
+  "requirements": [
+    {
+      "req_id": "REQ-001",
+      "prd_ref": "4.1",
+      "description": "A user who is not logged in must be able to initiate checkout from the cart page without being redirected to the login or account creation page.",
+      "actors": [
+        "Guest User"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-002",
+      "prd_ref": "4.2",
+      "description": "The guest checkout flow must collect the user's email address before the payment step. Email is required for order confirmation delivery.",
+      "actors": [
+        "Guest User"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-003",
+      "prd_ref": "4.3",
+      "description": "Upon successful payment, the system must send an order confirmation email to the captured guest email address within 60 seconds. The email must include order ID, itemised receipt, and estimated delivery date.",
+      "actors": [
+        "System"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-004",
+      "prd_ref": "4.4",
+      "description": "The guest session must persist across all checkout steps \u2014 cart, shipping, payment, and confirmation \u2014 without requiring authentication. If the session expires mid-checkout, the user must receive a recoverable error and not lose their cart.",
+      "actors": [
+        "Guest User"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-005",
+      "prd_ref": "4.5",
+      "description": "After order confirmation is displayed, the system may present a single optional prompt inviting the guest user to create an account. This prompt must be dismissible and must not block access to the confirmation page.",
+      "actors": [
+        "Guest User"
+      ],
+      "testable": true,
+      "ambiguity_flags": []
+    }
+  ]
+}

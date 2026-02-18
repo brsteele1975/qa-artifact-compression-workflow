@@ -370,6 +370,7 @@ The following are explicitly out of scope for v1:
 | Classification outside allowed values | Schema violation | Prompt constraint enforced; Review Agent renders raw values — violations are visible |
 | Requirement hallucination | False coverage | `prd_ref` required on every requirement |
 | Exploratory overgeneration | Noise in test plan | Exploratory gated on risk or ambiguity flag only |
+| Unstructured input has no section references | `prd_ref` defaults to document title on all requirements, reducing traceability | Flag in `ambiguity_flags`; human reviewer must manually trace requirements to source |
 
 ---
 
