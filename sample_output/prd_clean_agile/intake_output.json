@@ -3,7 +3,7 @@
     "purpose": "Validate the guest checkout flow to ensure users can complete purchases without creating an account, reducing cart abandonment.",
     "in_scope": [
       "Guest checkout initiation",
-      "Email capture during checkout",
+      "Email capture for guest users",
       "Order confirmation email delivery",
       "Session integrity across checkout steps",
       "Optional account creation prompt post-purchase"
@@ -13,6 +13,17 @@
       "Social login or SSO",
       "Saved payment methods for guest users",
       "Post-purchase account upgrade prompt"
+    ]
+  },
+  "project_context": {
+    "primary_user_journey": "Guest users complete a purchase without creating an account.",
+    "revenue_critical_paths": [
+      "Guest checkout flow",
+      "Email capture and confirmation"
+    ],
+    "known_high_severity_areas": [
+      "Session integrity across checkout steps",
+      "Order confirmation email delivery"
     ]
   },
   "requirements": [

@@ -1,6 +1,6 @@
 {
   "plan_context": {
-    "purpose": "To validate the implementation of discount code support during the checkout process, ensuring correct application and error handling.",
+    "purpose": "This test plan validates the integration and functionality of discount code support during the checkout process.",
     "in_scope": [
       "Discount code entry and validation",
       "Error messaging for invalid or inapplicable codes",
@@ -9,13 +9,23 @@
     ],
     "out_of_scope": [
       "Stacking multiple discount codes",
-      "Handling of zero total order scenarios"
+      "Confirmed handling of zero total orders"
+    ]
+  },
+  "project_context": {
+    "primary_user_journey": "Customers apply a discount code during checkout to receive a discount on their order.",
+    "revenue_critical_paths": [
+      "Discount code validation and application"
+    ],
+    "known_high_severity_areas": [
+      "Real-time order total updates",
+      "Error messaging for invalid codes"
     ]
   },
   "requirements": [
     {
       "req_id": "REQ-001",
-      "prd_ref": "Feature Discussion Notes",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
       "description": "Customers can enter a discount code during checkout to receive a discount on their order.",
       "actors": [
         "Customer"
@@ -25,51 +35,51 @@
     },
     {
       "req_id": "REQ-002",
-      "prd_ref": "Feature Discussion Notes",
-      "description": "The discount code should be entered after shipping information but before payment.",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
+      "description": "The discount code should be applied before payment but after shipping.",
       "actors": [
         "Customer"
       ],
       "testable": true,
       "ambiguity_flags": [
-        "Design placement may change from cart page to checkout flow."
+        "Uncertainty about final placement in the checkout flow"
       ]
     },
     {
       "req_id": "REQ-003",
-      "prd_ref": "Feature Discussion Notes",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
       "description": "The discount engine validates the code and returns a discount value.",
       "actors": [
         "System"
       ],
       "testable": true,
       "ambiguity_flags": [
-        "Unclear if the discount value is a percentage, flat amount, or both."
+        "Unclear if the discount value is a percentage, flat amount, or both"
       ]
     },
     {
       "req_id": "REQ-004",
-      "prd_ref": "Feature Discussion Notes",
-      "description": "Expired discount codes return a clear error message.",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
+      "description": "Expired codes return a clear error message.",
       "actors": [
-        "System"
+        "Customer"
       ],
       "testable": true,
       "ambiguity_flags": []
     },
     {
       "req_id": "REQ-005",
-      "prd_ref": "Feature Discussion Notes",
-      "description": "Codes that are valid but do not apply to the items in the cart return a user-facing message.",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
+      "description": "Codes that do not apply to items in the cart return a user-facing message.",
       "actors": [
-        "System"
+        "Customer"
       ],
       "testable": true,
       "ambiguity_flags": []
     },
     {
       "req_id": "REQ-006",
-      "prd_ref": "Feature Discussion Notes",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
       "description": "Only one discount code can be applied per order.",
       "actors": [
         "Customer"
@@ -79,23 +89,35 @@
     },
     {
       "req_id": "REQ-007",
-      "prd_ref": "Feature Discussion Notes",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
       "description": "Order total updates in real time when a discount code is applied, without a page reload.",
       "actors": [
-        "System"
+        "Customer"
       ],
       "testable": true,
       "ambiguity_flags": []
     },
     {
       "req_id": "REQ-008",
-      "prd_ref": "Feature Discussion Notes",
-      "description": "The discount code entry field must work on the mobile layout of the cart page.",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
+      "description": "The discount field must work on the mobile layout of the cart page.",
       "actors": [
         "Customer"
       ],
       "testable": true,
       "ambiguity_flags": []
+    },
+    {
+      "req_id": "REQ-009",
+      "prd_ref": "Feature Discussion Notes \u2014 Discount Code Support",
+      "description": "Handling of orders with a total of zero after applying a discount code is not confirmed.",
+      "actors": [
+        "System"
+      ],
+      "testable": false,
+      "ambiguity_flags": [
+        "Uncertainty about whether to run zero total orders through the payment flow"
+      ]
     }
   ]
 }

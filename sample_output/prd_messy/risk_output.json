@@ -1,63 +1,66 @@
 [
   {
     "req_id": "REQ-001",
-    "risk": "Email confirmation may not be sent promptly, affecting customer satisfaction.",
-    "severity": "medium",
-    "severity_basis": "The timing of email delivery affects user experience but not core functionality.",
+    "risk": "Email confirmation may be delayed, affecting customer satisfaction.",
+    "severity": "high",
+    "severity_basis": "Email confirmation is a known high severity area and critical for post-purchase communication.",
+    "reasoning": "The requirement affects the Email Confirmation area, which is known to be high severity, and is critical for the primary user journey.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-001",
         "req_id": "REQ-001",
-        "objective": "Verify that an email confirmation is sent after a purchase.",
+        "objective": "Verify that email confirmation is sent within the expected time frame.",
         "type": "integration",
         "surface": "service",
         "priority": "P1",
-        "human_note": null
+        "human_note": "Ensure to test with different email providers to check delivery speed."
       },
       {
         "tc_id": "TC-002",
         "req_id": "REQ-001",
-        "objective": "Explore the timing of email delivery to ensure it meets user expectations.",
+        "objective": "Explore the impact of delayed email confirmations on user experience.",
         "type": "exploratory",
         "surface": "workflow",
-        "priority": "P2",
-        "human_note": "Focus on the timing aspect of email delivery."
+        "priority": "P1",
+        "human_note": "Investigate scenarios where email delivery is delayed beyond the expected time."
       }
     ]
   },
   {
     "req_id": "REQ-002",
-    "risk": "Potential confusion or friction in the guest checkout process.",
-    "severity": "medium",
-    "severity_basis": "Guest checkout is a secondary feature but impacts user acquisition and conversion.",
+    "risk": "Potential friction in guest checkout due to unclear UX design.",
+    "severity": "high",
+    "severity_basis": "Guest Checkout is a known high severity area and part of the primary user journey.",
+    "reasoning": "The requirement is part of the Guest Checkout, a known high severity area, and directly affects the primary user journey.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-003",
         "req_id": "REQ-002",
-        "objective": "Verify that users can complete a purchase without creating an account.",
+        "objective": "Verify that users can complete checkout without creating an account.",
         "type": "e2e",
-        "surface": "workflow",
+        "surface": "ui",
         "priority": "P1",
-        "human_note": null
+        "human_note": "Focus on the flow from adding items to cart to completing purchase as a guest."
       },
       {
         "tc_id": "TC-004",
         "req_id": "REQ-002",
-        "objective": "Explore the UX design for guest checkout to identify potential friction points.",
+        "objective": "Explore the UX design for encouraging account creation during guest checkout.",
         "type": "exploratory",
-        "surface": "ui",
+        "surface": "workflow",
         "priority": "P2",
-        "human_note": "Pay attention to how the design encourages account creation."
+        "human_note": "Evaluate different design approaches for account creation prompts."
       }
     ]
   },
   {
     "req_id": "REQ-003",
-    "risk": "Incorrect handling of discount codes could lead to incorrect pricing.",
-    "severity": "high",
-    "severity_basis": "Incorrect pricing directly affects revenue and customer trust.",
+    "risk": "Incorrect handling of discount codes could lead to revenue loss.",
+    "severity": "medium",
+    "severity_basis": "Discount code application is part of a revenue-critical path.",
+    "reasoning": "The requirement is part of the revenue-critical path for discount code application, affecting the checkout flow.",
     "severity_locked": false,
     "test_cases": [
       {
@@ -65,45 +68,46 @@
         "req_id": "REQ-003",
         "objective": "Verify that a single discount code can be applied and updates the total correctly.",
         "type": "integration",
-        "surface": "service",
+        "surface": "api",
         "priority": "P1",
-        "human_note": null
+        "human_note": "Test with valid, invalid, and expired codes."
       },
       {
         "tc_id": "TC-006",
         "req_id": "REQ-003",
-        "objective": "Explore the handling of multiple and expired discount codes.",
+        "objective": "Explore the handling of multiple discount codes during checkout.",
         "type": "exploratory",
         "surface": "workflow",
-        "priority": "P1",
-        "human_note": "Test various combinations of valid, invalid, and expired codes."
+        "priority": "P2",
+        "human_note": "Investigate how the system behaves with multiple codes applied."
       }
     ]
   },
   {
     "req_id": "REQ-004",
-    "risk": "Incomplete or incorrect order details could confuse customers.",
-    "severity": "medium",
-    "severity_basis": "Order details are important for customer satisfaction but not critical to transaction completion.",
+    "risk": "Order details may not display correctly on mobile, affecting user satisfaction.",
+    "severity": "high",
+    "severity_basis": "Order Confirmation Page is a known high severity area and critical for post-purchase communication.",
+    "reasoning": "The requirement affects the Order Confirmation Page, a known high severity area, and is critical for the primary user journey.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-007",
         "req_id": "REQ-004",
-        "objective": "Verify that order details are displayed correctly after purchase.",
+        "objective": "Verify that order details are displayed correctly on mobile devices.",
         "type": "e2e",
         "surface": "ui",
         "priority": "P1",
-        "human_note": null
+        "human_note": "Test across different mobile devices and screen sizes."
       },
       {
         "tc_id": "TC-008",
         "req_id": "REQ-004",
-        "objective": "Explore the inclusion of estimated delivery information.",
+        "objective": "Explore the impact of design changes on the order confirmation page.",
         "type": "exploratory",
-        "surface": "ui",
+        "surface": "workflow",
         "priority": "P2",
-        "human_note": "Check if estimated delivery is displayed and accurate."
+        "human_note": "Assess how design changes affect the display of order details."
       }
     ]
   }

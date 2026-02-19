@@ -34,8 +34,8 @@ PROMPT_PATH = Path("prompts/risk_prompt.md")
 
 # --- Input file --- uncomment the one you want to run
 # INPUT_PATH = Path("sample_output/prd_messy/intake_output.json")
-# INPUT_PATH = Path("sample_output/prd_clean_agile/intake_output.json")
-INPUT_PATH = Path("sample_output/raw_prd_notes/intake_output.json")
+INPUT_PATH = Path("sample_output/prd_clean_agile/intake_output.json")
+# INPUT_PATH = Path("sample_output/raw_prd_notes/intake_output.json")
 
 # Derive output filename from input
 OUTPUT_PATH = Path(f"sample_output/{INPUT_PATH.parent.name}/risk_output.json")
@@ -45,15 +45,19 @@ def load_system_prompt(path: Path) -> str:
     with open(path, "r") as f:
         return f.read()
 
-# --- Load and extract requirements from Intake Agent output ---
-def load_requirements(path: Path) -> list:
+# --- Load and extract requirements and project_context from Intake Agent output ---
+def load_requirements(path: Path) -> tuple:
     with open(path, "r") as f:
         intake_output = json.load(f)
-    return intake_output["requirements"]
+    return intake_output["requirements"], intake_output.get("project_context", None)
 
 # --- Build user message ---
-def build_user_message(requirements: list) -> str:
-    return f"Here is the requirements array to process:\n\n{json.dumps(requirements, indent=2)}"
+def build_user_message(requirements: list, project_context: dict) -> str:
+    return (
+        f"Here are the inputs to process:\n\n"
+        f"PROJECT CONTEXT:\n{json.dumps(project_context, indent=2)}\n\n"
+        f"REQUIREMENTS:\n{json.dumps(requirements, indent=2)}"
+    )
 
 # --- Call the model ---
 def run_risk_agent(system_prompt: str, user_message: str) -> list:
@@ -79,7 +83,7 @@ def run_risk_agent(system_prompt: str, user_message: str) -> list:
 # --- Save output ---
 def save_output(data: list, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
     print(f"Output saved to {path}")
 
@@ -116,10 +120,10 @@ def main():
     system_prompt = load_system_prompt(PROMPT_PATH)
 
     print(f"Loading requirements from {INPUT_PATH}...")
-    requirements = load_requirements(INPUT_PATH)
+    requirements, project_context = load_requirements(INPUT_PATH)
 
     print("Building user message...")
-    user_message = build_user_message(requirements)
+    user_message = build_user_message(requirements, project_context)
 
     print("Calling Risk Agent...")
     output = run_risk_agent(system_prompt, user_message)

@@ -1,19 +1,20 @@
 [
   {
     "req_id": "REQ-001",
-    "risk": "Guest users may be incorrectly redirected to login or account creation.",
-    "severity": "medium",
-    "severity_basis": "Redirection could disrupt the guest checkout flow, affecting user experience.",
+    "risk": "Guest users may be incorrectly redirected to login or account creation, blocking checkout.",
+    "severity": "high",
+    "severity_basis": "This requirement affects the primary user journey and revenue-critical guest checkout flow.",
+    "reasoning": "The requirement is part of the primary user journey and revenue-critical path, making any redirection issues high severity.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-001",
         "req_id": "REQ-001",
-        "objective": "Verify that a guest user can initiate checkout without redirection to login.",
+        "objective": "Verify that guest users can initiate checkout without redirection to login or account creation.",
         "type": "e2e",
         "surface": "ui",
         "priority": "P1",
-        "human_note": "Ensure no login or account creation prompts appear during checkout initiation."
+        "human_note": "Ensure the user remains on the checkout path without any login prompts."
       }
     ]
   },
@@ -21,17 +22,18 @@
     "req_id": "REQ-002",
     "risk": "Failure to collect email could prevent order confirmation delivery.",
     "severity": "high",
-    "severity_basis": "Email is critical for order confirmation, impacting communication with the user.",
+    "severity_basis": "Email capture is critical for order confirmation, part of the revenue-critical path.",
+    "reasoning": "The requirement is part of the revenue-critical path for email capture and confirmation.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-002",
         "req_id": "REQ-002",
-        "objective": "Verify that the guest checkout flow collects the user's email before payment.",
+        "objective": "Ensure the guest checkout flow collects the user's email before the payment step.",
         "type": "e2e",
         "surface": "workflow",
         "priority": "P1",
-        "human_note": "Check that email is a mandatory field before proceeding to payment."
+        "human_note": "Check that the email field is mandatory and correctly positioned in the flow."
       }
     ]
   },
@@ -39,53 +41,56 @@
     "req_id": "REQ-003",
     "risk": "Order confirmation email may not be sent or may lack required details.",
     "severity": "high",
-    "severity_basis": "Timely and complete order confirmation is crucial for user trust and satisfaction.",
+    "severity_basis": "Order confirmation email delivery is a known high severity area.",
+    "reasoning": "The requirement touches a known high severity area of order confirmation email delivery.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-003",
         "req_id": "REQ-003",
-        "objective": "Verify that an order confirmation email is sent within 60 seconds of payment.",
+        "objective": "Verify the system sends an order confirmation email with all required details within 60 seconds.",
         "type": "integration",
         "surface": "service",
         "priority": "P1",
-        "human_note": "Ensure the email includes order ID, itemized receipt, and estimated delivery date."
+        "human_note": "Check email content for order ID, itemised receipt, and estimated delivery date."
       }
     ]
   },
   {
     "req_id": "REQ-004",
-    "risk": "Session expiration could lead to cart loss or checkout disruption.",
+    "risk": "Session expiration could cause loss of cart contents during checkout.",
     "severity": "high",
-    "severity_basis": "Session persistence is critical to prevent data loss and ensure a smooth checkout process.",
+    "severity_basis": "Session integrity across checkout steps is a known high severity area.",
+    "reasoning": "The requirement affects session integrity, a known high severity area, and is part of the primary user journey.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-004",
         "req_id": "REQ-004",
-        "objective": "Verify that the guest session persists across all checkout steps.",
+        "objective": "Ensure guest session persists across all checkout steps without requiring authentication.",
         "type": "e2e",
         "surface": "workflow",
         "priority": "P1",
-        "human_note": "Simulate session expiration and check for recoverable error without cart loss."
+        "human_note": "Simulate session expiration and verify cart recovery process."
       }
     ]
   },
   {
     "req_id": "REQ-005",
-    "risk": "Account creation prompt may block access to the confirmation page.",
-    "severity": "low",
-    "severity_basis": "The prompt is optional and should not impact the core checkout flow.",
+    "risk": "Optional prompt may block access to the confirmation page.",
+    "severity": "medium",
+    "severity_basis": "The prompt is not part of the critical path but could degrade UX if not dismissible.",
+    "reasoning": "The requirement affects UX but does not block the primary user journey or revenue-critical path.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-005",
         "req_id": "REQ-005",
-        "objective": "Verify that the account creation prompt is dismissible and non-blocking.",
+        "objective": "Verify the optional prompt is dismissible and does not block access to the confirmation page.",
         "type": "exploratory",
         "surface": "ui",
-        "priority": "P3",
-        "human_note": "Ensure the prompt can be dismissed and does not obstruct the confirmation page."
+        "priority": "P2",
+        "human_note": "Ensure the prompt can be easily dismissed and does not interfere with user flow."
       }
     ]
   }

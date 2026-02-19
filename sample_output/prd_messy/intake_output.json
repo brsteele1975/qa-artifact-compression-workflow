@@ -1,24 +1,36 @@
 {
   "plan_context": {
-    "purpose": "To validate the implementation of the new checkout flow, ensuring it is faster, easier, and supports guest users.",
+    "purpose": "To validate the new checkout flow, ensuring it is faster, easier, and supports guest users while addressing key customer complaints.",
     "in_scope": [
-      "Email confirmation",
-      "Guest checkout",
-      "Discount code application",
-      "Order confirmation page"
+      "Email Confirmation",
+      "Guest Checkout",
+      "Discount Code Application",
+      "Order Confirmation Page"
     ],
     "out_of_scope": [
       "Rebuilding the login flow",
       "Touching the payment gateway",
-      "Post order fulfilment",
+      "Any of the post order fulfilment stuff",
       "Admin tools"
+    ]
+  },
+  "project_context": {
+    "primary_user_journey": "A user completes a purchase through the checkout process.",
+    "revenue_critical_paths": [
+      "Checkout flow",
+      "Discount code application"
+    ],
+    "known_high_severity_areas": [
+      "Email Confirmation",
+      "Guest Checkout",
+      "Order Confirmation Page"
     ]
   },
   "requirements": [
     {
       "req_id": "REQ-001",
       "prd_ref": "2.1 Email Confirmation",
-      "description": "After a purchase, an email confirmation with order details should be sent to the customer.",
+      "description": "After a purchase, an email confirmation with order details should be sent quickly.",
       "actors": [
         "Customer"
       ],
@@ -48,20 +60,21 @@
       ],
       "testable": true,
       "ambiguity_flags": [
-        "Handling of multiple discount codes and expired codes is undefined."
+        "Handling of multiple discount codes is TBD.",
+        "Rules for expired codes are not defined."
       ]
     },
     {
       "req_id": "REQ-004",
       "prd_ref": "Order Confirmation Page",
-      "description": "Display order details after purchase, including item name, quantity, price, total, and possibly estimated delivery.",
+      "description": "Show order details after purchase, compatible with mobile.",
       "actors": [
         "Customer"
       ],
       "testable": true,
       "ambiguity_flags": [
-        "Inclusion of estimated delivery is not confirmed.",
-        "Design comp is not finalized."
+        "Design comp is changing.",
+        "Inclusion of estimated delivery is not confirmed."
       ]
     }
   ]

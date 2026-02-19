@@ -1,145 +1,190 @@
 [
   {
     "req_id": "REQ-001",
-    "risk": "Incorrect discount application could lead to financial discrepancies.",
+    "risk": "Failure to apply discount code could prevent customers from receiving expected discounts.",
     "severity": "high",
-    "severity_basis": "This affects the core user journey and financial transactions.",
+    "severity_basis": "This requirement is part of the primary user journey and revenue critical path.",
+    "reasoning": "The requirement directly affects the primary user journey and is part of the revenue critical path, making it high severity.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-001",
         "req_id": "REQ-001",
-        "objective": "Verify that a discount code can be entered during checkout.",
+        "objective": "Verify that a discount code can be entered and applied during checkout.",
         "type": "e2e",
         "surface": "ui",
         "priority": "P1",
-        "human_note": null
+        "human_note": "Ensure the discount is reflected in the order total."
       }
     ]
   },
   {
     "req_id": "REQ-002",
-    "risk": "Potential confusion due to design placement changes.",
+    "risk": "Incorrect placement of discount code application could disrupt the checkout flow.",
     "severity": "medium",
-    "severity_basis": "Design changes can affect user experience but not core functionality.",
+    "severity_basis": "The requirement affects the checkout flow but has a workaround if misplaced.",
+    "reasoning": "The ambiguity about placement affects the revenue critical path, but it is not part of the primary user journey.",
     "severity_locked": false,
     "test_cases": [
       {
         "tc_id": "TC-002",
         "req_id": "REQ-002",
-        "objective": "Ensure the discount code entry is positioned correctly in the checkout flow.",
+        "objective": "Verify the discount code is applied after shipping but before payment.",
+        "type": "integration",
+        "surface": "workflow",
+        "priority": "P2",
+        "human_note": "Check the sequence of operations in the checkout flow."
+      },
+      {
+        "tc_id": "TC-003",
+        "req_id": "REQ-002",
+        "objective": "Explore potential issues with discount code placement in the checkout flow.",
         "type": "exploratory",
         "surface": "workflow",
         "priority": "P2",
-        "human_note": "Check both cart page and checkout flow for placement."
+        "human_note": "Investigate any disruptions caused by incorrect placement."
       }
     ]
   },
   {
     "req_id": "REQ-003",
-    "risk": "Ambiguity in discount value type could lead to incorrect discounts.",
-    "severity": "high",
-    "severity_basis": "Incorrect discount calculations can affect financial transactions.",
+    "risk": "Ambiguity in discount value type could lead to incorrect discount calculations.",
+    "severity": "medium",
+    "severity_basis": "The ambiguity could affect discount calculations, impacting user satisfaction.",
+    "reasoning": "The requirement is part of the revenue critical path, and the ambiguity could lead to incorrect discount application.",
     "severity_locked": false,
     "test_cases": [
       {
-        "tc_id": "TC-003",
+        "tc_id": "TC-004",
         "req_id": "REQ-003",
-        "objective": "Validate that the discount engine correctly interprets the discount code.",
-        "type": "integration",
+        "objective": "Verify the discount engine correctly validates codes and returns the correct discount value.",
+        "type": "unit",
         "surface": "service",
-        "priority": "P1",
+        "priority": "P2",
         "human_note": "Test with both percentage and flat amount codes if applicable."
+      },
+      {
+        "tc_id": "TC-005",
+        "req_id": "REQ-003",
+        "objective": "Explore the handling of different discount value types by the discount engine.",
+        "type": "exploratory",
+        "surface": "service",
+        "priority": "P2",
+        "human_note": "Investigate how the system handles different discount types."
       }
     ]
   },
   {
     "req_id": "REQ-004",
-    "risk": "Expired codes not returning clear messages could confuse users.",
-    "severity": "medium",
-    "severity_basis": "Affects user experience but not core functionality.",
+    "risk": "Failure to return a clear error message for expired codes could confuse users.",
+    "severity": "high",
+    "severity_basis": "Error messaging is a known high severity area.",
+    "reasoning": "The requirement is in a known high severity area, affecting user experience and error handling.",
     "severity_locked": false,
     "test_cases": [
       {
-        "tc_id": "TC-004",
+        "tc_id": "TC-006",
         "req_id": "REQ-004",
-        "objective": "Ensure expired discount codes return a clear error message.",
+        "objective": "Verify that expired discount codes return a clear error message.",
         "type": "unit",
-        "surface": "api",
-        "priority": "P2",
-        "human_note": null
+        "surface": "ui",
+        "priority": "P1",
+        "human_note": "Ensure the error message is user-friendly and informative."
       }
     ]
   },
   {
     "req_id": "REQ-005",
-    "risk": "Valid codes not applicable to items could lead to user frustration.",
+    "risk": "Failure to return a message for non-applicable codes could lead to user confusion.",
     "severity": "medium",
-    "severity_basis": "Affects user experience but not core functionality.",
+    "severity_basis": "The requirement affects user experience but is not part of the primary user journey.",
+    "reasoning": "While not in a high severity area, it affects user experience and is part of the revenue critical path.",
     "severity_locked": false,
     "test_cases": [
       {
-        "tc_id": "TC-005",
+        "tc_id": "TC-007",
         "req_id": "REQ-005",
-        "objective": "Verify that non-applicable valid codes return a user-facing message.",
+        "objective": "Verify that non-applicable discount codes return a user-facing message.",
         "type": "unit",
-        "surface": "api",
+        "surface": "ui",
         "priority": "P2",
-        "human_note": null
+        "human_note": "Check the clarity and helpfulness of the message."
       }
     ]
   },
   {
     "req_id": "REQ-006",
-    "risk": "Allowing multiple codes could lead to incorrect discount application.",
-    "severity": "high",
-    "severity_basis": "This affects financial transactions and order processing.",
+    "risk": "Allowing multiple discount codes could lead to incorrect discount application.",
+    "severity": "medium",
+    "severity_basis": "The requirement ensures only one code is applied, preventing potential revenue loss.",
+    "reasoning": "The requirement is part of the revenue critical path, ensuring correct discount application.",
     "severity_locked": false,
     "test_cases": [
       {
-        "tc_id": "TC-006",
+        "tc_id": "TC-008",
         "req_id": "REQ-006",
-        "objective": "Ensure only one discount code can be applied per order.",
-        "type": "e2e",
-        "surface": "workflow",
-        "priority": "P1",
-        "human_note": null
+        "objective": "Verify that only one discount code can be applied per order.",
+        "type": "unit",
+        "surface": "service",
+        "priority": "P2",
+        "human_note": "Test with multiple codes to ensure only one is applied."
       }
     ]
   },
   {
     "req_id": "REQ-007",
-    "risk": "Order total not updating in real time could mislead users.",
-    "severity": "medium",
-    "severity_basis": "Affects user experience but not core functionality.",
+    "risk": "Failure to update order total in real time could lead to user confusion.",
+    "severity": "high",
+    "severity_basis": "Real-time order total updates are a known high severity area.",
+    "reasoning": "The requirement is in a known high severity area, affecting user experience and order accuracy.",
     "severity_locked": false,
     "test_cases": [
       {
-        "tc_id": "TC-007",
+        "tc_id": "TC-009",
         "req_id": "REQ-007",
         "objective": "Verify that the order total updates in real time when a discount code is applied.",
-        "type": "non_functional",
+        "type": "integration",
         "surface": "ui",
-        "priority": "P2",
-        "human_note": "Check for performance issues during real-time updates."
+        "priority": "P1",
+        "human_note": "Ensure no page reload is required for the update."
       }
     ]
   },
   {
     "req_id": "REQ-008",
-    "risk": "Discount code entry not working on mobile could limit accessibility.",
+    "risk": "Failure of the discount field on mobile could hinder mobile user experience.",
     "severity": "medium",
-    "severity_basis": "Affects user experience on mobile devices.",
+    "severity_basis": "The requirement affects mobile user experience, which is critical for accessibility.",
+    "reasoning": "While not part of the primary user journey, mobile functionality is important for user accessibility.",
     "severity_locked": false,
     "test_cases": [
       {
-        "tc_id": "TC-008",
+        "tc_id": "TC-010",
         "req_id": "REQ-008",
-        "objective": "Ensure the discount code entry field works on the mobile layout.",
+        "objective": "Verify that the discount field functions correctly on the mobile layout.",
         "type": "e2e",
         "surface": "ui",
         "priority": "P2",
         "human_note": "Test on various mobile devices and screen sizes."
+      }
+    ]
+  },
+  {
+    "req_id": "REQ-009",
+    "risk": "Uncertainty about handling zero total orders could lead to incorrect payment processing.",
+    "severity": "medium",
+    "severity_basis": "The ambiguity could affect payment processing, impacting revenue.",
+    "reasoning": "The requirement is part of the revenue critical path, and the ambiguity could lead to processing errors.",
+    "severity_locked": false,
+    "test_cases": [
+      {
+        "tc_id": "TC-011",
+        "req_id": "REQ-009",
+        "objective": "Explore the handling of orders with a total of zero after applying a discount code.",
+        "type": "exploratory",
+        "surface": "workflow",
+        "priority": "P2",
+        "human_note": "Investigate how zero total orders are processed in the payment flow."
       }
     ]
   }
