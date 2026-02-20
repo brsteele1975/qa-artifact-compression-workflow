@@ -26,13 +26,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # --- Paths ---
-PROMPT_PATH = Path("prompts/intake_prompt.md")
+# The paths below were used for isolated agent testing during development
+# PROMPT_PATH = Path("prompts/intake_prompt.md")
 # --- Input file --- uncomment the one you want to run
 # INPUT_PATH = Path("sample_input/prd_messy.md")
 # INPUT_PATH = Path("sample_input/prd_clean_agile.md")
-INPUT_PATH = Path("sample_input/raw_prd_notes.md")
-
-OUTPUT_PATH = Path(f"sample_output/{INPUT_PATH.stem}/intake_output.json")
+# INPUT_PATH = Path("sample_input/raw_prd_notes.md")
+# OUTPUT_PATH = Path(f"sample_output/{INPUT_PATH.stem}/intake_output.json")
 
 # --- Load system prompt ---
 def load_system_prompt(path: Path) -> str:
@@ -91,25 +91,27 @@ def validate_output(data: dict) -> None:
 
     print(f"Validation passed. {len(data['requirements'])} requirements parsed.")
 
-# --- Main ---
-def main():
-    print("Loading system prompt...")
-    system_prompt = load_system_prompt(PROMPT_PATH)
 
-    print("Loading PRD...")
-    prd_content = load_prd(INPUT_PATH)
+# # --- Main ---
+# Preserved for reference. Use run_pipeline.py to run the full pipeline.
+# def main():
+#     print("Loading system prompt...")
+#     system_prompt = load_system_prompt(PROMPT_PATH)
 
-    print("Building user message...")
-    user_message = build_user_message(prd_content)
+#     print("Loading PRD...")
+#     prd_content = load_prd(INPUT_PATH)
 
-    print("Calling Intake Agent...")
-    output = run_intake_agent(system_prompt, user_message)
+#     print("Building user message...")
+#     user_message = build_user_message(prd_content)
 
-    print("Validating output...")
-    validate_output(output)
+#     print("Calling Intake Agent...")
+#     output = run_intake_agent(system_prompt, user_message)
 
-    print("Saving output...")
-    save_output(output, OUTPUT_PATH)
+#     print("Validating output...")
+#     validate_output(output)
 
-if __name__ == "__main__":
-    main()
+#     print("Saving output...")
+#     save_output(output, OUTPUT_PATH)
+
+# if __name__ == "__main__":
+#     main()

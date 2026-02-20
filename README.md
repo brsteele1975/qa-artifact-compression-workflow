@@ -46,6 +46,13 @@ Constraints:
 - Markdown artifact generation for review
 - Human approval required at all times
 
+### Sample Output
+
+The `sample_output/` folder contains reference outputs generated during 
+development across three input types — a clean agile PRD, a messy PRD, 
+and raw meeting notes. These are preserved as examples of what the 
+pipeline produces and are never overwritten by the runner.
+
 ---
 
 ### What This Is Not
@@ -58,7 +65,7 @@ Constraints:
 ---
 ## How This System Improves
 
-The workfllow is designed to get better through use. During initial testing, severity
+The workflow is designed to get better through use. During initial testing, severity
 heuristics were updated to better define the boundaries of the core user
 journey — specifically to include post-purchase communication as a high
 severity concern.

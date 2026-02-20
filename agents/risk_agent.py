@@ -30,15 +30,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # --- Paths ---
-PROMPT_PATH = Path("prompts/risk_prompt.md")
-
+# The paths below were used for isolated agent testing during development.
+# PROMPT_PATH = Path("prompts/risk_prompt.md")
 # --- Input file --- uncomment the one you want to run
 # INPUT_PATH = Path("sample_output/prd_messy/intake_output.json")
-INPUT_PATH = Path("sample_output/prd_clean_agile/intake_output.json")
+# INPUT_PATH = Path("sample_output/prd_clean_agile/intake_output.json")
 # INPUT_PATH = Path("sample_output/raw_prd_notes/intake_output.json")
-
 # Derive output filename from input
-OUTPUT_PATH = Path(f"sample_output/{INPUT_PATH.parent.name}/risk_output.json")
+# OUTPUT_PATH = Path(f"sample_output/{INPUT_PATH.parent.name}/risk_output.json")
 
 # --- Load system prompt ---
 def load_system_prompt(path: Path) -> str:
@@ -115,24 +114,25 @@ def validate_output(data: list) -> None:
     print(f"Validation passed. {req_count} requirements processed, {tc_count} test cases generated.")
 
 # --- Main ---
-def main():
-    print("Loading system prompt...")
-    system_prompt = load_system_prompt(PROMPT_PATH)
+# Preserved for reference. Use run_pipeline.py to run the full pipeline.
+# def main():
+#     print("Loading system prompt...")
+#     system_prompt = load_system_prompt(PROMPT_PATH)
 
-    print(f"Loading requirements from {INPUT_PATH}...")
-    requirements, project_context = load_requirements(INPUT_PATH)
+#     print(f"Loading requirements from {INPUT_PATH}...")
+#     requirements, project_context = load_requirements(INPUT_PATH)
 
-    print("Building user message...")
-    user_message = build_user_message(requirements, project_context)
+#     print("Building user message...")
+#     user_message = build_user_message(requirements, project_context)
 
-    print("Calling Risk Agent...")
-    output = run_risk_agent(system_prompt, user_message)
+#     print("Calling Risk Agent...")
+#     output = run_risk_agent(system_prompt, user_message)
 
-    print("Validating output...")
-    validate_output(output)
+#     print("Validating output...")
+#     validate_output(output)
 
-    print("Saving output...")
-    save_output(output, OUTPUT_PATH)
+#     print("Saving output...")
+#     save_output(output, OUTPUT_PATH)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

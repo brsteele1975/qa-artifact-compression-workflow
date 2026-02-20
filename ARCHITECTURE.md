@@ -30,6 +30,7 @@ Human Review & Approval
 - Each agent is a single prompted LLM call with strict JSON output — except Review Agent which outputs Markdown.
 - No agent modifies upstream output.
 - All artifacts are human-readable and independently approvable.
+- `sample_output/` is preserved reference material — the runner writes to `output/` which is gitignored and not committed
 
 ---
 
